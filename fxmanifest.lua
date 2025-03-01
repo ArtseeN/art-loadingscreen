@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 game 'gta5'
 
-author 'Senin İsmin'
+author 'ArtseeN'
 description 'Modern FiveM Loading Screen'
 version '1.0.0'
 
