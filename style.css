@@ -1,0 +1,510 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    color: #ffffff;
+    background: #0a0a0a;
+}
+
+#background-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -2;
+    object-fit: cover;
+    filter: brightness(0.3) contrast(1.2);
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    z-index: -1;
+}
+
+.container {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    gap: 20px;
+    padding: 30px;
+}
+
+.logo {
+    margin-bottom: 10px;
+    margin-top: -50px;
+}
+
+.logo img {
+    max-width: 180px;
+    height: auto;
+    filter: brightness(0.9);
+}
+
+.server-info {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.server-info h1 {
+    font-size: 2.8em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-top: 0;
+}
+
+.loading-container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.loading-text {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.loading-bar {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.status {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.status span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9em;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status i {
+    color: #fff;
+    font-size: 1.1em;
+}
+
+.bottom-content {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-media {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: center;
+}
+
+.tips {
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Sosyal medya butonları */
+.social-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.social-icon i {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    opacity: 0.8;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.social-icon span {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.social-icon:hover i {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.social-icon:hover span {
+    opacity: 1;
+}
+
+/* Animasyonlar */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.server-info > * {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.server-info > *:nth-child(1) { animation-delay: 0.1s; }
+.server-info > *:nth-child(2) { animation-delay: 0.2s; }
+.server-info > *:nth-child(3) { animation-delay: 0.3s; }
+
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr auto auto;
+        padding: 20px;
+    }
+
+    .logo, .server-info, .tips, .social-media {
+        grid-column: 1 / 2;
+    }
+
+    .logo { grid-row: 1 / 2; justify-content: center; }
+    .social-media { grid-row: 2 / 3; justify-content: center; }
+    .server-info { grid-row: 3 / 4; }
+    .tips { grid-row: 4 / 5; }
+}
+
+@media (max-width: 600px) {
+    .server-info h1 { font-size: 2em; }
+    .status { flex-direction: column; gap: 15px; align-items: center; }
+    .social-media { flex-direction: column; align-items: center; }
+    .social-icon { width: 200px; text-align: center; }
+}
+
+.steam-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 400px;
+}
+
+.profile-image {
+    position: relative;
+}
+
+.profile-image img {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-status {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #0a0a0a;
+}
+
+.profile-status.online {
+    background: #00ff88;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.profile-name {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #fff;
+}
+
+.profile-id {
+    font-size: 0.8em;
+    color: #666;
+    letter-spacing: 1px;
+}
+
+/* Müzik Player'ı güncelle */
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    padding: 15px;
+    z-index: 100;
+    /* Arka plan ve border'ı kaldırdık */
+}
+
+.music-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.song-name {
+    font-size: 0.9em;
+    color: #fff;
+    opacity: 0.9;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Okunabilirlik için text shadow ekledik */
+}
+
+.artist-name {
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.music-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.music-controls button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 8px;
+    opacity: 0.8;
+    font-size: 0.9em;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.music-controls button:hover {
+    opacity: 1;
+}
+
+.volume-control {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.volume-control i {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.volume-slider {
+    width: 60px;
+    height: 3px;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Kurallar Slider - Daha minimal tasarım */
+.rules-slider {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+    margin: 20px 0;
+    position: relative;
+}
+
+.rules-container {
+    position: relative;
+    height: 100px;
+    overflow: hidden;
+}
+
+.rule {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    display: none;
+}
+
+.rule.active {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+}
+
+.rule i {
+    font-size: 1.5em;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 8px;
+}
+
+.rule h3 {
+    font-size: 1.1em;
+    margin-bottom: 6px;
+    color: #fff;
+    opacity: 0.9;
+}
+
+.rule p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9em;
+}
+
+.rules-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: #fff;
+}
+
+/* Server Stats - Daha minimal tasarım */
+.server-stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
+.server-stat i {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Hava efektlerini kaldır */
+.weather-effects {
+    display: none;
+}
+
+/* Responsive düzenlemeler */
+@media (max-width: 768px) {
+    .rules-slider, .music-player {
+        max-width: 100%;
+    }
+    
+    .music-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .volume-control {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .music-player {
+        bottom: 10px;
+        right: 10px;
+        width: calc(100% - 20px);
+        max-width: 300px;
+    }
+
+    .social-media {
+        bottom: 10px;
+        left: 10px;
+        gap: 20px;
+    }
+
+    .bottom-content {
+        grid-column: 1 / 2;
+    }
+
+    .logo img {
+        max-width: 150px;
+    }
+}
+
+/* CSS'de config değişkenlerini kullan */
+:root {
+    --primary-color: var(--primary, #ff1a1a);
+    --secondary-color: var(--secondary, #ff4d4d);
+    --text-color: var(--text, #ffffff);
+    --text-secondary: var(--text-secondary, #666666);
+    --bg-color: var(--bg, rgba(0, 0, 0, 0.9));
+    --bg-secondary: var(--bg-secondary, rgba(255, 255, 255, 0.05));
+}
+
+/* Örnek kullanım */
+.progress {
+    background: var(--primary-color);
+}
+
+.social-icon {
+    color: var(--text-color);
+} 

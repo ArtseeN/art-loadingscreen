@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunucu Loading Screen</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="server-info">
+            <div class="logo">
+                <img src="logo.png" alt="Sunucu Logo">
+            </div>
+            
+            <h1>Sunucuya Hoş Geldiniz</h1>
+            
+            <div class="steam-profile">
+                <div class="profile-image">
+                    <img src="https://via.placeholder.com/64" alt="Steam Avatar" id="steam-avatar">
+                    <div class="profile-status online"></div>
+                </div>
+                <div class="profile-info">
+                    <span class="profile-name" id="steam-name">Steam Kullanıcısı</span>
+                    <span class="profile-id">Steam ID: <span id="steam-id">XXXXX</span></span>
+                </div>
+            </div>
+
+            <div class="loading-container">
+                <div class="loading-text">
+                    <span>Yükleniyor</span>
+                    <span id="loading-percentage">0%</span>
+                </div>
+                <div class="loading-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+
+            <div class="status">
+                <span class="players">
+                    <i class="fas fa-users"></i>
+                    Oyuncular: <span id="current-players">0</span>/<span id="max-players">32</span>
+                </span>
+                <span class="ping">
+                    <i class="fas fa-signal"></i>
+                    Ping: <span id="ping">0</span>ms
+                </span>
+                <span class="server-stat">
+                    <i class="fas fa-clock"></i>
+                    Uptime: <span id="server-uptime">0 gün</span>
+                </span>
+            </div>
+
+            <!-- Sunucu Kuralları Slider -->
+            <div class="rules-slider">
+                <div class="rules-container">
+                    <div class="rule active">
+                        <i class="fas fa-gavel"></i>
+                        <h3>Kural #1</h3>
+                        <p>Sunucumuzda her türlü hack/hile kullanımı yasaktır!</p>
+                    </div>
+                    <div class="rule">
+                        <i class="fas fa-comment-slash"></i>
+                        <h3>Kural #2</h3>
+                        <p>Küfür, hakaret ve argo kullanımı yasaktır!</p>
+                    </div>
+                    <div class="rule">
+                        <i class="fas fa-user-shield"></i>
+                        <h3>Kural #3</h3>
+                        <p>Yetkililere saygılı davranınız!</p>
+                    </div>
+                </div>
+                <div class="rules-dots"></div>
+            </div>
+
+            <div class="music-player">
+                <div class="music-info">
+                    <span class="song-name">Ambient Music</span>
+                    <span class="artist-name">Artist 1</span>
+                </div>
+                <div class="music-controls">
+                    <button class="prev-btn"><i class="fas fa-backward"></i></button>
+                    <button class="play-btn"><i class="fas fa-play"></i></button>
+                    <button class="next-btn"><i class="fas fa-forward"></i></button>
+                    <div class="volume-control">
+                        <i class="fas fa-volume-up"></i>
+                        <input type="range" min="0" max="100" value="50" class="volume-slider">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="weather-effects" id="weather-container">
+            <!-- Hava efektleri burada oluşturulacak -->
+        </div>
+
+        <!-- Tips ve social-media'yı bir div içine alalım -->
+        <div class="bottom-content">
+            <div class="social-media">
+                <a href="#" class="social-icon">
+                    <i class="fab fa-discord"></i>
+                    <span>Discord</span>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+            </div>
+
+            <div class="tips">
+                <p id="tip-text">İpucu yükleniyor...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="background-overlay"></div>
+    <video autoplay muted loop id="background-video">
+        <source src="background.mp4" type="video/mp4">
+    </video>
+
+    <script src="script.js"></script>
+</body>
+</html> 
