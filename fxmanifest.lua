@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 game 'gta5'
 
-author 'ArtseeN'
+author 'Senin İsmin'
 description 'Modern FiveM Loading Screen'
 version '1.0.0'
 
@@ -17,9 +17,5 @@ files {
     'music/*.mp3',
 }
 
-client_scripts {
-    'config.lua',
-    'client.lua'
-}
-
+client_script 'client.lua'
 server_script 'server.lua' 

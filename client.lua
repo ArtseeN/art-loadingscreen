@@ -13,19 +13,10 @@ end
 local config = Config
 
 -- NUI'ye veri gönderme fonksiyonu
-function SendConfigToNUI()
+function SendConfigToNUI(info)
     SendNUIMessage({
         type = "updateConfig",
-        config = {
-            serverName = config.ServerName,
-            colors = config.Colors,
-            socialMedia = config.SocialMedia,
-            music = config.Music,
-            rules = config.Rules,
-            tips = config.Tips,
-            animations = config.Animations,
-            video = config.Video
-        }
+        config = info.config
     })
 end
 
@@ -35,7 +26,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         if NetworkIsSessionStarted() then
             -- Config'i NUI'ye gönder
-            SendConfigToNUI()
+            SendConfigToNUI(config)
             
             -- Video ve müzik ayarlarını uygula
             SendNUIMessage({
@@ -66,11 +57,9 @@ function GetSteamProfileInfo()
     
     if steamid then
         -- Steam Web API kullanarak avatar ve diğer bilgileri al
-        -- Not: Bunun için Steam Web API key gerekli
-        -- Steam API key'i config'e ekleyebilirsiniz
-        if Config.SteamAPIKey then
+        if config.steamAPI.enabled and config.steamAPI.key then
             local steamid64 = string.gsub(steamid, "steam:", "")
-            local url = string.format("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=%s&steamids=%s", Config.SteamAPIKey, steamid64)
+            local url = string.format("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=%s&steamids=%s", config.steamAPI.key, steamid64)
             
             PerformHttpRequest(url, function(err, text, headers)
                 if text then
@@ -101,7 +90,20 @@ Citizen.CreateThread(function()
     end
 end)
 
--- Server bilgilerini güncelleme
+-- Server'dan gelen bilgileri al
+RegisterNetEvent('loading:receiveServerInfo')
+AddEventHandler('loading:receiveServerInfo', function(info)
+    -- Config'i güncelle
+    SendConfigToNUI(info)
+    
+    -- Server bilgilerini güncelle
+    SendNUIMessage({
+        type = "updateServerInfo",
+        info = info
+    })
+end)
+
+-- Ping güncellemesi
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(1000)
@@ -117,26 +119,9 @@ Citizen.CreateThread(function()
     end
 end)
 
--- Server'dan gelen bilgileri al
-RegisterNetEvent('loading:receiveServerInfo')
-AddEventHandler('loading:receiveServerInfo', function(info)
-    SendNUIMessage({
-        type = "updateServerInfo",
-        info = info
-    })
-end)
-
-RegisterNetEvent('loading:updateServerInfo')
-AddEventHandler('loading:updateServerInfo', function(info)
-    SendNUIMessage({
-        type = "updateServerInfo",
-        info = info
-    })
-end)
-
 -- NUI'den gelen mesajları dinle
 RegisterNUICallback('ready', function(data, cb)
     -- NUI hazır olduğunda config'i tekrar gönder
-    SendConfigToNUI()
+    SendConfigToNUI(config)
     cb('ok')
 end) 
